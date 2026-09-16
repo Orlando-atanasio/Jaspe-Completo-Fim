@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <meta name="theme-color" content="#0F172A" />
+    <!-- Mitiga XSS armazenado: bloqueia scripts inline/event handlers externos.
+         Notas sanitizadas via whitelist; CSP é defesa em profundidade.
+         blob:/data: liberados p/ download de backup e imagens da nota;
+         connect-src libera cotações (brapi/coingecko/proxies) e nada mais. -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; media-src 'self' data: blob:; connect-src 'self' https://brapi.dev https://api.coingecko.com https://api.allorigins.win https://api.cors.lol https://api.codetabs.com https://query1.finance.yahoo.com https://query2.finance.yahoo.com; font-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+    />
+    <title>Jaspe — Painel Executivo & JaspeNote</title>
+    <meta name="description" content="JASPE — Painel Executivo, Gestão Financeira, JaspeNote, Contatos e Cofre de Segurança" />
+    <meta property="og:title" content="Jaspe — Painel Executivo & JaspeNote" />
+    <meta property="og:description" content="JASPE — Painel Executivo, Gestão Financeira, JaspeNote, Contatos e Cofre de Segurança" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body class="bg-[#0E0A09]">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

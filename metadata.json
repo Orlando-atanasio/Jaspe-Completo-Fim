@@ -1,0 +1,6 @@
+{
+  "name": "Jasp",
+  "description": "JASPE — Painel Executivo, Gestão Financeira, JaspeNote, Contatos e Cofre de Segurança",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

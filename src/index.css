@@ -1,0 +1,560 @@
+@import "tailwindcss";
+
+/* Trava a rolagem da PÁGINA (o scroll vive só dentro das áreas internas):
+   sem isso, gestos rápidos arrastam a página inteira e o FAB/rodapé —
+   que são fixos na carcaça — passeiam pela tela. */
+html,
+body {
+  overscroll-behavior: none;
+}
+
+/* Zoom proporcional global (10%): equivale ao "zoom da página" do navegador.
+   Reposiciona o viewport de layout junto (sem overflow/corte), então TUDO
+   cresce junto — textos, botões, ícones e espaçamentos — mantendo o layout.
+   Afeta web e app nativo por igual, de propósito (paridade visual). */
+html {
+  zoom: 1.1;
+}
+
+@layer base {
+  :root {
+    --bg-color: #1A1311;
+    --card-color: #251C1A;
+    --border-color: #352824;
+    --accent-orange: #EA580C;
+    --carmesim: #991B1B;
+    --emerald: #10B981;
+    --gold: #D97706;
+    --pink: #DB2777;
+    --blue: #3B82F6;
+  }
+}
+
+/* Backgrounds & Textures */
+.bg-jaspe-bg {
+  background-color: #1A1311;
+}
+
+.bg-jaspe-card {
+  background-color: #251C1A;
+}
+
+.bg-jaspe-sidebarBg {
+  background-color: #160F0E;
+}
+
+.border-jaspe-border {
+  border-color: #352824;
+}
+
+.text-jaspe-accent {
+  color: #EA580C;
+}
+
+.text-jaspe-emerald {
+  color: #10B981;
+}
+
+.text-jaspe-gold {
+  color: #D97706;
+}
+
+.text-jaspe-pink {
+  color: #DB2777;
+}
+
+.text-jaspe-blue {
+  color: #3B82F6;
+}
+
+/* Paper Textures for OneNote Editor */
+.ruled-paper {
+  background-color: #251C1A;
+  background-image: linear-gradient(rgba(234, 88, 12, 0.08) 1px, transparent 1px);
+  background-size: 100% 28px;
+  line-height: 28px;
+}
+
+.dots-paper {
+  background-color: #251C1A;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.grid-paper {
+  background-color: #251C1A;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+/* Card Glows */
+.glow-trab {
+  box-shadow: 0 0 15px rgba(217, 119, 6, 0.08);
+}
+.glow-pess {
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.08);
+}
+.glow-ideia {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.08);
+}
+
+/* Shake Animation for Wrong PIN */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+.shake-active {
+  animation: shake 0.3s ease-in-out;
+}
+
+/* GAVETA LATERAL TRANSLÚCIDA (90% de transparência solicitada explicitamente pelo usuário) */
+.drawer-translucent {
+  background-color: rgba(26, 19, 17, 0.12) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+/* Light Theme */
+.light-theme {
+  --bg-color: #FAF8F5;
+  --card-color: #FFFFFF;
+  --border-color: #E6DFDA;
+  background-color: #FAF8F5 !important;
+  color: #2D221E !important;
+}
+
+.light-theme .bg-jaspe-bg {
+  background-color: #FAF8F5 !important;
+}
+
+.light-theme .bg-jaspe-card {
+  background-color: #FFFFFF !important;
+  border-color: #E6DFDA !important;
+  box-shadow: 0 4px 15px rgba(45, 34, 30, 0.04) !important;
+}
+
+.light-theme .border-jaspe-border {
+  border-color: #E6DFDA !important;
+}
+
+.light-theme .drawer-translucent {
+  background-color: rgba(250, 246, 240, 0.45) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+}
+
+/* Light Theme - Text Colors */
+.light-theme .text-zinc-100,
+.light-theme .text-zinc-200,
+.light-theme .text-zinc-300 {
+  color: #2D221E !important;
+}
+
+.light-theme .text-zinc-400,
+.light-theme .text-zinc-500 {
+  color: #7A6963 !important;
+}
+
+/* Light Theme - Banner Executivo Laranja/Cacau */
+.light-theme .banner-executivo {
+  background: linear-gradient(135deg, #FFF5ED 0%, #FEE8DA 100%) !important;
+  border: 1px solid #EADCD4 !important;
+  box-shadow: 0 4px 20px rgba(234, 88, 12, 0.08) !important;
+}
+
+.light-theme .banner-glow {
+  background-color: rgba(234, 88, 12, 0.08) !important;
+}
+
+.light-theme .banner-badge {
+  background-color: rgba(234, 88, 12, 0.08) !important;
+  border-color: rgba(234, 88, 12, 0.25) !important;
+  color: #C2410C !important;
+}
+
+.light-theme .banner-badge span {
+  background-color: #EA580C !important;
+}
+
+.light-theme .banner-title {
+  color: #2D221E !important;
+}
+
+.light-theme .banner-subtitle {
+  color: #6E5C58 !important;
+}
+
+.light-theme .banner-highlight-tasks {
+  color: #C2410C !important;
+}
+
+.light-theme .banner-highlight-assets {
+  color: #047857 !important;
+}
+
+/* Botoes Saúde e Captura IA no Modo Claro */
+.light-theme .btn-saude {
+  background-color: #E11D48 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 8px rgba(225, 29, 72, 0.25) !important;
+}
+
+.light-theme .btn-saude,
+.light-theme .btn-saude * {
+  color: #FFFFFF !important;
+  fill: #FFFFFF !important;
+}
+
+.light-theme .btn-captura {
+  background-color: #EA580C !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 8px rgba(234, 88, 12, 0.25) !important;
+}
+
+.light-theme .btn-captura,
+.light-theme .btn-captura * {
+  color: #FFFFFF !important;
+}
+
+/* Light Theme - Scratchpad (Rascunho Rápido) */
+.light-theme .scratchpad-container {
+  background-color: #FFFFFF !important;
+  border-color: #E6DFDA !important;
+}
+
+.light-theme .scratchpad-textarea {
+  background-color: #FAF7F4 !important;
+  border-color: #E6DFDA !important;
+  color: #2D221E !important;
+}
+
+.light-theme .scratchpad-textarea::placeholder {
+  color: #9C8C85 !important;
+}
+
+.light-theme .scratchpad-btn {
+  background-color: #FFF3EB !important;
+  border-color: #F8D5C2 !important;
+  color: #C2410C !important;
+}
+
+.light-theme .scratchpad-btn:hover {
+  background-color: #EA580C !important;
+  color: #FFFFFF !important;
+}
+
+.light-theme .scratchpad-btn:hover * {
+  color: #FFFFFF !important;
+}
+
+/* Light Theme - Compromissos de Hoje */
+.light-theme .compromissos-container {
+  background-color: #FFFFFF !important;
+  border-color: #E6DFDA !important;
+}
+
+.light-theme .compromisso-item {
+  background-color: #FAF7F4 !important;
+  border-color: #EFE8E2 !important;
+}
+
+.light-theme .compromisso-item:hover {
+  border-color: #F8D5C2 !important;
+}
+
+.light-theme .compromisso-title {
+  color: #2D221E !important;
+}
+
+.light-theme .compromisso-sub {
+  color: #7A6963 !important;
+}
+
+.light-theme .compromisso-check {
+  color: #9C8C85 !important;
+}
+
+/* Light Theme - Donut Chart */
+.light-theme .donut-track {
+  stroke: #EAE3DC !important;
+}
+
+.light-theme .chart-legend-text {
+  color: #5A4943 !important;
+}
+
+/* General Dark Background Replacement in Light Theme */
+.light-theme .bg-jaspe-sidebarBg {
+  background-color: #FFFFFF !important;
+  border-color: #E6DFDA !important;
+}
+
+.light-theme aside {
+  background-color: #FFFFFF !important;
+  border-color: #E6DFDA !important;
+  color: #2D221E !important;
+}
+
+/* Categorias Drawer - Modo Escuro (Default) */
+.category-active-item {
+  background-color: rgba(249, 115, 22, 0.2) !important;
+  color: #FB923C !important;
+  border: 1px solid rgba(249, 115, 22, 0.4) !important;
+}
+
+.category-active-item * {
+  color: #FB923C !important;
+}
+
+.category-idle-item {
+  background-color: transparent !important;
+  color: #F4F4F5 !important;
+}
+
+.category-idle-item:hover {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #FFFFFF !important;
+}
+
+.category-idle-item span {
+  color: #F4F4F5 !important;
+}
+
+.category-badge-count {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  color: #E4E4E7 !important;
+}
+
+.category-trash-btn {
+  color: #A1A1AA !important;
+}
+
+.category-trash-btn:hover {
+  color: #FB7185 !important;
+  background-color: rgba(244, 63, 94, 0.15) !important;
+}
+
+/* Categorias Drawer em Modo Claro */
+.light-theme .category-active-item {
+  background-color: #FFF3EB !important;
+  color: #C2410C !important;
+  border: 1px solid #F8D5C2 !important;
+}
+
+.light-theme .category-active-item * {
+  color: #C2410C !important;
+}
+
+.light-theme .category-idle-item {
+  background-color: transparent !important;
+  color: #443530 !important;
+}
+
+.light-theme .category-idle-item:hover {
+  background-color: #F7F2EE !important;
+  color: #2D221E !important;
+}
+
+.light-theme .category-idle-item span {
+  color: #443530 !important;
+}
+
+.light-theme .category-badge-count {
+  background-color: #EFE8E2 !important;
+  color: #6E5C58 !important;
+}
+
+.light-theme .category-trash-btn {
+  color: #8C7B75 !important;
+}
+
+.light-theme .category-trash-btn:hover {
+  color: #E11D48 !important;
+  background-color: #FFE4E6 !important;
+}
+
+/* Modais, Bottom Sheets e Gavetas de Edição */
+.light-theme .bg-\[\#1A1311\],
+.light-theme .bg-\[\#251C1A\],
+.light-theme .bg-\[\#160F0E\],
+.light-theme .bg-\[\#120D0C\],
+.light-theme .bg-\[\#110D0C\],
+.light-theme .bg-neutral-900,
+.light-theme .bg-zinc-900 {
+  background-color: #FFFFFF !important;
+  border-color: #E6DFDA !important;
+  color: #2D221E !important;
+}
+
+.light-theme [class*="rounded-t-[32px]"] {
+  background-color: #FFFFFF !important;
+  border-color: #E6DFDA !important;
+  color: #2D221E !important;
+  box-shadow: 0 -10px 40px rgba(45, 34, 30, 0.12) !important;
+}
+
+.light-theme .bg-zinc-800 {
+  background-color: #F0EAE4 !important;
+  color: #443530 !important;
+  border: 1px solid #E6DFDA !important;
+}
+
+.light-theme .bg-zinc-800:hover {
+  background-color: #E6DFDA !important;
+  color: #1A1311 !important;
+}
+
+.light-theme .bg-zinc-800 * {
+  color: #443530 !important;
+}
+
+.light-theme .border-white\/5,
+.light-theme .border-white\/10,
+.light-theme .border-white\/20 {
+  border-color: #E6DFDA !important;
+}
+
+.light-theme .bg-black\/5,
+.light-theme .bg-black\/10,
+.light-theme .bg-black\/15,
+.light-theme .bg-black\/20,
+.light-theme .bg-black\/30,
+.light-theme .bg-black\/40 {
+  background-color: rgba(45, 34, 30, 0.04) !important;
+  border-color: #E6DFDA !important;
+}
+
+.light-theme header {
+  background-color: #FFFFFF !important;
+  border-color: #E6DFDA !important;
+}
+
+.light-theme header h1,
+.light-theme header span {
+  color: #2D221E !important;
+}
+
+.light-theme input,
+.light-theme textarea,
+.light-theme select {
+  background-color: #FAF7F4 !important;
+  border-color: #E6DFDA !important;
+  color: #2D221E !important;
+}
+
+.light-theme input::placeholder,
+.light-theme textarea::placeholder {
+  color: #9C8C85 !important;
+}
+
+/* Ficha da tarefa flutuante: campos transparentes (sem card branco), texto em negrito */
+.task-sheet-transparent .task-sheet-field {
+  background-color: transparent !important;
+  font-weight: 700 !important;
+}
+.task-sheet-transparent .task-sheet-field::placeholder {
+  opacity: 0.45;
+}
+.light-theme .task-sheet-transparent .task-sheet-field {
+  background-color: transparent !important;
+  border-color: rgba(45, 34, 30, 0.25) !important;
+  color: #2D221E !important;
+}
+
+/* Keep white text in primary action buttons */
+.light-theme .bg-orange-600,
+.light-theme .bg-pink-600,
+.light-theme .bg-emerald-500,
+.light-theme .bg-emerald-600,
+.light-theme .bg-red-500,
+.light-theme .bg-red-600,
+.light-theme .bg-blue-600 {
+  color: #FFFFFF !important;
+}
+
+.light-theme .bg-orange-600 *,
+.light-theme .bg-pink-600 *,
+.light-theme .bg-emerald-500 *,
+.light-theme .bg-emerald-600 *,
+.light-theme .bg-red-500 *,
+.light-theme .bg-red-600 *,
+.light-theme .bg-blue-600 * {
+  color: #FFFFFF !important;
+}
+
+.light-theme footer {
+  background-color: #FFFFFF !important;
+  border-color: #E6DFDA !important;
+}
+
+.light-theme header button:hover {
+  background-color: rgba(45, 34, 30, 0.06) !important;
+}
+
+.light-theme footer button:hover {
+  background-color: rgba(45, 34, 30, 0.06) !important;
+}
+
+.light-theme .ruled-paper {
+  background-color: #FFFFFF !important;
+  background-image: linear-gradient(rgba(234, 88, 12, 0.12) 1px, transparent 1px) !important;
+}
+
+.light-theme .dots-paper {
+  background-color: #FFFFFF !important;
+  background-image: radial-gradient(rgba(45, 34, 30, 0.15) 1px, transparent 0) !important;
+}
+
+.light-theme .grid-paper {
+  background-color: #FFFFFF !important;
+  background-image: linear-gradient(rgba(45, 34, 30, 0.06) 1px, transparent 1px) !important;
+}
+
+/* Kanban Drag Over */
+.kanban-drag-over {
+  border: 2px dashed #EA580C !important;
+  background-color: rgba(234, 88, 12, 0.08) !important;
+}
+
+@keyframes bounce-short {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.animate-bounce-short {
+  animation: bounce-short 1.5s ease-in-out infinite;
+}
+
+/* Impressão do relatório: intencionalmente SEM regras globais @media print.
+   O relatório é impresso via documento isolado em iframe (ver handlePrint em
+   GlobalModals.tsx). O hack body visibility:hidden quebra paginação, corta o
+   conteúdo de containers com overflow/max-height e depende da opção
+   "gráficos de fundo" do diálogo de impressão — por isso o PDF saía sem
+   bordas e desconfigurado. */
+
+/* Tabela da carteira: deslize com o dedo (sem setas, sem barra visível) */
+.table-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  touch-action: pan-x pan-y;
+}
+.table-scroll::-webkit-scrollbar {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
